@@ -2,7 +2,7 @@
 
 This is a very simple proof of concept that displays what software a  visitor has installed on their computer. It uses jquery & flash.
 
-[Demo](http://johnmcl.github.io/) | [More Details]()
+[Demo](http://johnmcl.github.io/software-detect-js/) | [More Details](https://medium.com/p/b436a0e031ac/)
 
 These links should helpful if you wish to expand the functionality:
 
