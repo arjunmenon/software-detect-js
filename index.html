@@ -1,0 +1,116 @@
+<html>
+<head>
+  <title>Software Detect</title>
+</head>
+<body>
+  
+  <div id="content">            
+    <div class="noprint">
+      <p id="status"><span>Checking...</span></p>
+    </div>
+  </div>
+
+  <div id="font-detect-swf"></div>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <script src="javascripts/swfobject.js"></script>
+  <script src="javascripts/font-detect.js"></script>  
+  <script>
+    $(document).ready(function() {
+
+      // Check Flash version
+      if (!swfobject.hasFlashPlayerVersion("9.0.0"))
+        $("#status span").html("You don't have a compatible version of Flash installed?");
+      else
+        $("#status span").html("Loading...");
+
+      var fontDetect = new FontDetect("font-detect-swf", "flash/FontList.swf", function(fd) {
+        fonts = $.map(fd.fonts(), function(val, i) { return val.fontName.toLowerCase().replace(/\s/g, ""); });
+        softwares = [];
+        
+
+          if ($.inArray('adobecaslonpro', fonts) > -1 && $.inArray('adobenaskh', fonts) < 0 && $.inArray('adobegurmukhi', fonts) < 0) {
+            softwares.push({name: 'Photoshop CS4', check: true});
+          } else {
+            softwares.push({name: 'Photoshop CS4', check: false});
+          }
+
+          if ($.inArray('adobearabic', fonts) > -1 && $.inArray('adobedevanagari', fonts) < 0 && $.inArray('adobegurmukhi', fonts) < 0) {
+            softwares.push({name: 'Photoshop CS5', check: true});
+          } else {
+            softwares.push({name: 'Photoshop CS5', check: false});
+          }
+
+          if ($.inArray('adobedevanagari', fonts) > -1 && $.inArray('adobegurmukhi', fonts) < 0) {
+            softwares.push({name: 'Photoshop CS6', check: true});
+          } else {
+            softwares.push({name: 'Photoshop CS6', check: false});
+          }
+
+          if ($.inArray('myriadwebpro', fonts) > -1 && $.inArray('graphitestd', fonts) < 0) {
+            softwares.push({name: 'Photoshop Elements 8', check: true});
+          } else {
+            softwares.push({name: 'Photoshop Elements 8', check: false});
+          }
+
+          if ($.inArray('courierstd', fonts) > -1) {
+            softwares.push({name: 'Premier Elements 8', check: true});
+          } else {
+            softwares.push({name: 'Premier Elements 8', check: false});
+          }
+
+          if ($.inArray('brickhamscriptpro', fonts) > -1) {
+            softwares.push({name: 'Premier Elements 10', check: true});
+          } else {
+            softwares.push({name: 'Premier Elements 10', check: false});
+          }
+
+          if ($.inArray('adobegurmukhi', fonts) > -1) {
+            softwares.push({name: 'Creative Cloud', check: true});
+          } else {
+            softwares.push({name: 'Creative Cloud', check: false});
+          }
+
+          if ($.inArray('cablibri', fonts) > -1 && $.inArray('palatinolinotype', fonts) < 0) {
+            softwares.push({name: 'Microsoft Office 2008', check: true});
+          } else {
+            softwares.push({name: 'Microsoft Office 2008', check: false});
+          }
+
+          if ($.inArray('palatinolinotype', fonts) > -1) {
+            softwares.push({name: 'Microsoft Office 2011', check: true});
+          } else {
+            softwares.push({name: 'Microsoft Office 2011', check: false});
+          }
+
+          //if ($.inArray('jazzlet', fonts) > -1) {
+          //  softwares.push({name: 'Apple iWork', check: true});
+          //} else {
+          //  softwares.push({name: 'Apple iWork', check: false});
+          //}
+          
+          $("#status span").html("Completed <br />");
+
+          $.each(softwares, function( index, value ) {
+            if(value.check){
+              $(".softwares").append('<img src="images/tick.png"> ' + value.name + '<br />');
+            } else {
+              $(".softwares").append('<img src="images/cross.png"> ' + value.name + '<br />');
+            }
+          });
+        
+
+
+
+      });
+    });
+  </script>
+
+  <div class="softwares"></div>
+
+</body>
+</html>
+
+
+
+
